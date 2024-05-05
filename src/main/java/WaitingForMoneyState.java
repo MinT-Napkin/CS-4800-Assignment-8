@@ -28,6 +28,7 @@ class WaitingForMoneyState implements StateOfVendingMachine {
 
     public void cancelSelection(VendingMachine vendingMachine) {
         System.out.println("Cancelling snack selection.");
+        vendingMachine.setSelectedSnack(null);
         vendingMachine.setState(new IdleState());
     }
 

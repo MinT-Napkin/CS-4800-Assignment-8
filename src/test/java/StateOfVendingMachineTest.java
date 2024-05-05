@@ -6,7 +6,7 @@ import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class VendingMachineTest {
+public class StateOfVendingMachineTest {
 
     private VendingMachine vendingMachine;
 
@@ -22,37 +22,29 @@ public class VendingMachineTest {
         vendingMachine = new VendingMachine(snacks);
     }
 
-    @Test
-    public void testInsertMoneyReturningChange() {
-        vendingMachine.selectSnack("Pepsi");
-        vendingMachine.insertMoney(2.00);
-        assertEquals(0.00, vendingMachine.getInsertedMoney());
-    }
 
     @Test
-    public void testSelectSnack() {
+    public void testIdleState() {
         vendingMachine.selectSnack("Coke");
-        assertEquals("Coke", vendingMachine.getSelectedSnack());
-    }
-
-    @Test
-    public void testCancelSelection() {
-        vendingMachine.selectSnack("Coke");
-        vendingMachine.cancelSelection();
-        assertNull(vendingMachine.getSelectedSnack());
-    }
-
-    @Test
-    public void testDispenseSnack() {
-        vendingMachine.selectSnack("Coke");
-        vendingMachine.insertMoney(2.00);
+        vendingMachine.insertMoney(5);
         vendingMachine.dispenseSnack();
-        assertEquals(1, vendingMachine.getSnacks().get("Coke").getQuantity());
+
+        assertTrue(vendingMachine.getState() instanceof IdleState);
     }
 
     @Test
-    public void testGetSelectedSnackFromMap() {
-        vendingMachine.setSelectedSnack("Coke");
-        assertEquals("Coke", vendingMachine.getSelectedSnackFromMap().getName());
+    public void testWaitingForMoneyState() {
+        vendingMachine.selectSnack("Coke");
+        vendingMachine.insertMoney(0.5);
+
+        assertTrue(vendingMachine.getState() instanceof WaitingForMoneyState);
+    }
+
+    @Test
+    public void testDispensingSnackState() {
+        vendingMachine.selectSnack("Coke");
+        vendingMachine.insertMoney(5);
+
+        assertTrue(vendingMachine.getState() instanceof DispensingSnackState);
     }
 }

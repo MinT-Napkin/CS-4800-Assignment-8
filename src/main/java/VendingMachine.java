@@ -14,6 +14,7 @@ public class VendingMachine {
                                                     new SnickersDispenseHandler(null)
                                             )
                                     ))));
+    private StringBuilder outputBuffer = new StringBuilder(); // purely for testing purposes
 
     public VendingMachine(Map<String, Snack> snacks) {
         this.snacks = snacks;
@@ -75,5 +76,13 @@ public class VendingMachine {
 
     public void dispenseSnack() {
         state.dispenseSnack(this);
+    }
+
+    private void appendToOutput(String message) {
+        outputBuffer.append(message).append("\n");
+    }
+
+    public String getOutput() {
+        return outputBuffer.toString();
     }
 }
