@@ -14,7 +14,6 @@ public class VendingMachine {
                                                     new SnickersDispenseHandler(null)
                                             )
                                     ))));
-    private StringBuilder outputBuffer = new StringBuilder(); // purely for testing purposes
 
     public VendingMachine(Map<String, Snack> snacks) {
         this.snacks = snacks;
