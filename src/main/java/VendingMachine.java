@@ -78,11 +78,4 @@ public class VendingMachine {
         state.dispenseSnack(this);
     }
 
-    private void appendToOutput(String message) {
-        outputBuffer.append(message).append("\n");
-    }
-
-    public String getOutput() {
-        return outputBuffer.toString();
-    }
 }

@@ -1,4 +1,4 @@
-class WaitingForMoneyState implements StateOfVendingMachine {
+public class WaitingForMoneyState implements StateOfVendingMachine {
     public void selectSnack(VendingMachine vendingMachine, String snackName) {
         System.out.println("Snack already selected, please insert money to receive snack or cancel selection.");
     }
